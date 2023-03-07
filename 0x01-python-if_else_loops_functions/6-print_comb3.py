@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
-for d1 in range(0, 9):
-    for d2 in range(d1 + 1, 10):
-        print("{:d}{:d}".format(d1, d2), end='')
-        if d1 != 8:
-            print(", ", end='')
+for i in range(1, 10):
+    for j in range(i + 1, 10):
+        if i == 8 and j == 9:
+            print(i, j)
         else:
-            print("")
+            print(i, j, end=', ')
