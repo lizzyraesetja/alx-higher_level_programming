@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 
 listint_t *create_node(int n);
 
