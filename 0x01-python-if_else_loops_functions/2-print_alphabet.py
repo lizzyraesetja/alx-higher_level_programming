@@ -2,4 +2,4 @@
 i = 0
 while i < 26:
     print("{:s}".format(chr(i + ord('a'))), end="")
-    i = i + 1
+    i += 1
