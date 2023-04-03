@@ -5,4 +5,5 @@ Defines an empty class Rectangle
 
 class Rectangle
 """Empty representation of a rectangle"""
+def _init_(self):
 pass
