@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
-"""This ia the Rectangle module.
-This module provides a simple Rectangle class with attribute width and
- hieight.
-Default values of both attributes are 0."""
+#This ia the Rectangle module.
+#This module provides a simple Rectangle class with attribute width and hieight.
+#Default values of both attributes are 0.
 
 class Rectangle:
     """A Rectanagle class with attributes width and height"""
