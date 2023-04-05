@@ -1,73 +1,75 @@
 #!/usr/bin/python3
-"""This module  has a class for rectangule instances.
-The module has the class Rectangle.
-"""
+""" Class Rectangle """
 
 
 class Rectangle:
-    """class rectangle.
-    the class defines the height and width prived
-    instance attributes, getter and setter method for each
-    area and permiter methods,  __str__ implementation
-    __repr__ to be print with print() and str()
+    """
+    Rectangle that defines a rectangle by:
+    Private instance attribute: width (int)
+    Private instance attribute: height (int)
+    Instantiation with optional width and height
+    Public instance method: def area(self)
+    Public instance method: def perimeter(self)
+    print() and str() should print the rectangle with the character #
+    repr() should return a string representation of the rectangle
+     to be able to recreate a new instance by using eval()
     """
 
     def __init__(self, width=0, height=0):
-        if (type(height) != int):
-            raise TypeError("height must be an integer")
-        elif (height < 0):
-            raise ValueError("height must be >= 0")
-        else:
-            self.__height = height
-        if (type(width) != int):
-            raise TypeError("width must be an integer")
-        elif (width < 0):
-            raise ValueError("width must be >= 0")
-        else:
-            self.__width = width
-
-    def area(self):
-        return self.height * self.width
-
-    def perimeter(self):
-        if (self.height == 0 or self.width == 0):
-            return 0
-        else:
-            return 2 * self.height + 2 * self.width
-
-    def __str__(self):
-        if (self.height != 0 and self.width != 0):
-            a = self.width * "#" + "\n"
-            b = self.width * "#"
-            return ((self.height - 1) * a + b)
-        else:
-            return ("")
-
-    def __repr__(self):
-            return "Rectangle({}, {})".format(self.width, self.height)
-
-    @property
-    def height(self):
-        return self.__height
-
-    @height.setter
-    def height(self, value):
-        if (type(value) != int):
-            raise TypeError("height must be an integer")
-        elif (value < 0):
-            raise ValueError("height must be >= 0")
-        else:
-            self.__height = value
+        """ Constructor method """
+        self.width = width
+        self.height = height
 
     @property
     def width(self):
+        """ getter width property """
         return self.__width
+
+    @property
+    def height(self):
+        """ getter height property """
+        return self.__height
 
     @width.setter
     def width(self, value):
-        if (type(value) != int):
-            raise TypeError("width must be an integer")
-        elif (value < 0):
-            raise ValueError("width must be >= 0")
-        else:
-            self.__width = value
+        """ setter width property """
+        if not isinstance(value, int):
+            raise TypeError('width must be an integer')
+        if value < 0:
+            raise ValueError('width must be >= 0')
+        self.__width = value
+
+    @height.setter
+    def height(self, value):
+        """ setter height property """
+        if not isinstance(value, int):
+            raise TypeError('height must be an integer')
+        if value < 0:
+            raise ValueError('height must be >= 0')
+        self.__height = value
+
+    def area(self):
+        """ Return area of rectangle """
+        return self.width * self.height
+
+    def perimeter(self):
+        """ Return perimeter of rectangle """
+        if self.width == 0 or self.height == 0:
+            return 0
+        return (self.width + self.height) * 2
+
+    def __str__(self):
+        """ Return string to print rectangle with # """
+        if self.width == 0 or self.height == 0:
+            return ''
+        to_print = ''
+        for col in range(self.height):
+            for row in range(self.width):
+                to_print += '#'
+            if col != self.height - 1:
+                to_print += '\n'
+        return to_print
+
+    def __repr__(self):
+        """ Return a string representation of the rectangle """
+        return 'Rectangle({}, {})'.format(self.width, self.height)
