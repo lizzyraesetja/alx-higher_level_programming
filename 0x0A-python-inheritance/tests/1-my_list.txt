@@ -1,86 +1,76 @@
- >>> MyList = __import__('1-my_list').MyList
+0x0A-python-inheritance/1-my_list.txt module
+====================
 
-    ---- Check that the file is executable ----
->>> import os
+Importing the class
+>>> MyList = __import__("1-my_list").MyList
 
->>> import sys
+Test cases:
+>>> my_list = MyList()
+>>> my_list.print_sorted()
+[]
 
+>>> a_list = MyList('a')
+>>> a_list.print_sorted()
+['a']
 
->>> os.access('1-my_list.py', os.X_OK)
-True
-
----- Check for the documentation of the module ----
->>> len(__import__("1-my_list").__doc__) > 10
-True
-
----- Check for the documentation of the function ----
->>> len(__import__("1-my_list").MyList.__doc__) > 10
-True
-
----- Check for pep8 style ----
->>> os.popen("pep8 1-my_list.py").read()
-''
-
----- Check for a newline at the end of the file ----
->>> os.popen("cat -e 1-my_list.py | tail -1").read()[-1]
-'\n'
-
----- Check for the file has a shebang ----
->>> os.popen("cat 1-my_list.py | head -1").read()
-'#!/usr/bin/python3\n'
+>>> str_list = MyList('string')
+>>> str_list.print_sorted()
+['g', 'i', 'n', 'r', 's', 't']
 
 
----- Check that the README file exists ----
->>> cwd = os.getcwd()
->>> check_readme = cwd + '/README.md'
->>> os.path.exists(check_readme)
-True
+>>> my_list.append(1)
 
-    #--------------------Andy cases(thanks bro)--------------------
-    >>> MyList = __import__('1-my_list').MyList
-    >>> my_list = MyList()
-    >>> print(my_list)
-    []
-    >>> my_list.print_sorted()
-    []
-    >>> my_list.append(1)
-    >>> my_list.append(4)
-    >>> my_list.append(2)
-    >>> my_list.append(3)
-    >>> my_list.append(5)
+>>> my_list.append(4)
 
-    >>> print(my_list)
-    [1, 4, 2, 3, 5]
+>>> my_list.append(2)
 
-    >>> my_list.print_sorted()
-    [1, 2, 3, 4, 5]
+>>> my_list.append(3)
 
-    >>> print(my_list) #check sort vs sorted
-    [1, 4, 2, 3, 5]
+>>> my_list.append(5)
 
-    >>> my_list.append(-5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
 
-    >>> my_list.append(0)
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
 
-    >>> print(my_list)
-    [1, 4, 2, 3, 5, -5, 0]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
 
-    >>> my_list.print_sorted()
-    [-5, 0, 1, 2, 3, 4, 5]
+Negatives:
+>>> obj2 = MyList()
 
-    >>> print(my_list)
-    [1, 4, 2, 3, 5, -5, 0]
+>>> obj2.append(10)
 
-    __import__('1-my_list').__doc__ != None
-    True
+>>> obj2.append(1)
 
-    >>> MyList = __import__('1-my_list').MyList
+>>> obj2.append(-200)
 
-    >>> MyList.__doc__ != None
-    True
+>>> obj2.append(-7)
 
-    >>> my_list = MyList()
-    >>> print(my_list)
-    []
-    >>> my_list.print_sorted()
-    []
+>>> print(obj2)
+[10, 1, -200, -7]
+
+>>> obj2.print_sorted()
+[-200, -7, 1, 10]
+
+>>> float_list = MyList(3.5)
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> inf_list = MyList(float('inf'))
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> nan_list = MyList(float('nan'))
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> my_list.append('a')
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+...
+TypeError: unorderable types: str() < int()
