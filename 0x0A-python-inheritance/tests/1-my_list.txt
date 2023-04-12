@@ -1,0 +1,76 @@
+0x0A-python-inheritance/1-my_list.txt module
+====================
+
+Importing the class
+>>> MyList = __import__("1-my_list").MyList
+
+Test cases:
+>>> my_list = MyList()
+>>> my_list.print_sorted()
+[]
+
+>>> a_list = MyList('a')
+>>> a_list.print_sorted()
+['a']
+
+>>> str_list = MyList('string')
+>>> str_list.print_sorted()
+['g', 'i', 'n', 'r', 's', 't']
+
+
+>>> my_list.append(1)
+
+>>> my_list.append(4)
+
+>>> my_list.append(2)
+
+>>> my_list.append(3)
+
+>>> my_list.append(5)
+
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+Negatives:
+>>> obj2 = MyList()
+
+>>> obj2.append(10)
+
+>>> obj2.append(1)
+
+>>> obj2.append(-200)
+
+>>> obj2.append(-7)
+
+>>> print(obj2)
+[10, 1, -200, -7]
+
+>>> obj2.print_sorted()
+[-200, -7, 1, 10]
+
+>>> float_list = MyList(3.5)
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> inf_list = MyList(float('inf'))
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> nan_list = MyList(float('nan'))
+Traceback (most recent call last):
+...
+TypeError: 'float' object is not iterable
+
+>>> my_list.append('a')
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+...
+TypeError: unorderable types: str() < int()
