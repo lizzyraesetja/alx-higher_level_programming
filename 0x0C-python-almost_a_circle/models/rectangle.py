@@ -1,168 +1,120 @@
 #!/usr/bin/python3
 """
-    contains class Rectangle which implements Base.
+This module implements a Rectangle object
 """
 from models.base import Base
 
 class Rectangle(Base):
-    """
-        class Rectangle implements Base.
-        Methods:
-            __init__()
+    """Rectangle implementation
     """
 
-    def __init__(self, width, height, x=0, y=0, id=None):
+    def __init__(self, width: int, height: int, x=0, y=0, id=None):
+        """initialization
         """
-            Initializes the instance of the class..
-        """
-        super()._init_(id)
+        super().__init__(id)
+
         self.width = width
         self.height = height
         self.x = x
         self.y = y
 
+    def __str__(self) -> str:
+        """string representation
+        """
+        return "[Rectangle] ({}) {}/{} - {}/{}" \
+            .format(self.id, self.x, self.y, self.width, self.height)
+
+    def check_type_value(self, name:  str, value: object, greater_equal=False):
+        """type and value validation
+        """
+
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if not greater_equal:
+            if value <= 0:
+                raise ValueError("{} must be > 0".format(name))
+        else:
+            if value < 0:
+                raise ValueError("{} must be >= 0".format(name))
+
     @property
-    def width(self):
+    def width(self) -> int:
+        """width getter
         """
-            getter function for __width
-            Returns: width
-        """
-        return self._width
+        return self.__width
 
     @width.setter
-    def width(self, value):
+    def width(self, width: int):
+        """width setter
         """
-            setter function for width.
-            Args:
-                value (int): value to be set.
-        """
-        if type(value) != int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
+        self.check_type_value('width', width)
+        self.__width = width
 
-        self._width = value
-
-    @propery
-    def height(self):
+    @property
+    def height(self) -> int:
+        """height getter
         """
-            getter function for height
-            Returns: height
-        """
-        return self._height
+        return self.__height
 
     @height.setter
-    def height(self, value):
+    def height(self, height: int):
+        """height setter
         """
-            setter function for height
-            Args:
-               value (int): value to be set.
-        """
-        if type(value) != int:
-            raise TypeError("height must be an integer")
-        if value <= 0:
-            raise ValueError("height must be > 0")
-
-        self._height = value
+        self.check_type_value('height', height)
+        self.__height = height
 
     @property
-    def x(self):
+    def x(self) -> int:
+        """x getter
         """
-            getter function for x.
-            Returns: x
-        """
-        return self._x
+        return self.__x
 
     @x.setter
-    def x(self, value):
+    def x(self, x: int):
+        """x setter
         """
-            setter function for x.
-            Args:
-                value (int): value to be set.
-        """
-        if type(value) != int:
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
-        
-        self._x = value
+        self.check_type_value('x', x, True)
+        self.__x = x
 
     @property
-    def y(self):
+    def y(self) -> int:
+        """y getter
         """
-            getter function for y
-            Returns: y
-        """
-
-        return self._y
+        return self.__y
 
     @y.setter
-    def y(self, value):
+    def y(self, y: int):
+        """y setter
         """
-            setter function for y
-            Args:
-                value (int): value to be set.
-        """
+        self.check_type_value('y', y, True)
+        self.__y = y
 
-        if type(value) != int:
-            raise TypeError("y must be an integer")
-        if value < 0:
-            raise ValueError("y must be >= 0")
-
-        self.__y = value
-
-    def area(self):
+    def area(self) -> int:
+        """area
         """
-            returns the area of the Rectangle instance.
-        """
-        return (self.__width * self.__height)
+        return self.width * self.height
     def display(self):
+        """prints # shape of the rectangle
         """
-            prints to stdout the Rectangle instance with '#'
+        print('\n'*self.y, end='')
+        for lst in range(self.height):
+            print(' '*self.x + '#'*self.width)
+
+    def update(self, *args, **kwargs):
+        """update rectangle attributes
         """
-        rectangle = ""
-        print_symbol = "#"
 
-        print("\n" * self.y, end="")
+        expect = (self.id, self.width, self.height, self.x, self.y)
+        if args != ():
+            self.id, self.width, self.height, self.x, self.y = \
+                args + expect[len(args):len(expect)]
+                elif kwargs:
+            for (name, value) in kwargs.items():
+                 setattr(self, name, value)
 
-        for i in range(self.height):
-            rectangle += (" " * self.x) + (print_symbol*self.width) + "\n"
-            print(rectangle, end="")
-
-        def _str_(self):
-            """
-            returns a string formart of the rectangle
+    def to_dictionary(self) -> int:
+        """rectangle to dictionary
         """
-        return "[{}] ({}) {}/{} - {}/{}".format(type(self).__name__, self.id,
-                                                        self.__x, self.__y,
-                                                self.__width, self.__height)
-
-        def update(self, *args, **kwargs):
-        """
-            assigns key/value argument to attributes
-            kwargs is skipped if args is not empty
-            Args:
-                *args -  variable number of no-keyword args
-                **kwargs - variable number of keyworded args
-        """
-        if len(args) == 0:
-            for key, val in kwargs.items():
-                self.__setattr__(key, val)
-            return
-
-        try:
-            self.id = args[0]
-            self.width = args[1]
-            self.height = args[2]
-            self.x = args[3]
-            self.y = args[4]
-        except IndexError:
-            pass
-
-    def to_dictionary(self)
-    """
-                returns the dictionary repr of a rect
-        """
-        return {'x': getattr(self, "x"), 'y': getattr(self, "y"),
-                'id': getattr(self, "id"), 'height': getattr(self, "height"),
-                'width': getattr(self, "width")}
+        return {
+            'x': self.x, 'y': self.y, 'id': self.id,
+            'height': self.height, 'width': self.width}
