@@ -4,6 +4,7 @@ This module implements a Rectangle object
 """
 from models.base import Base
 
+
 class Rectangle(Base):
     """Rectangle implementation
     """
@@ -18,7 +19,7 @@ class Rectangle(Base):
         self.x = x
         self.y = y
 
-     def __str__(self) -> str:
+    def __str__(self) -> str:
         """string representation
         """
         return "[Rectangle] ({}) {}/{} - {}/{}" \
@@ -33,7 +34,7 @@ class Rectangle(Base):
         if not greater_equal:
             if value <= 0:
                 raise ValueError("{} must be > 0".format(name))
-            else:
+        else:
             if value < 0:
                 raise ValueError("{} must be >= 0".format(name))
 
@@ -41,7 +42,7 @@ class Rectangle(Base):
     def width(self) -> int:
         """width getter
         """
-        return selft.width
+        return self.__width
 
     @width.setter
     def width(self, width: int):
@@ -99,11 +100,12 @@ class Rectangle(Base):
         """
         print('\n'*self.y, end='')
         for lst in range(self.height):
-             print(' '*self.x + '#'*self.width)
+            print(' '*self.x + '#'*self.width)
 
     def update(self, *args, **kwargs):
         """update rectangle attributes
         """
+
         expect = (self.id, self.width, self.height, self.x, self.y)
         if args != ():
             self.id, self.width, self.height, self.x, self.y = \
